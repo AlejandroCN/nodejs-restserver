@@ -7,11 +7,12 @@ Aunque es una implementación ordenada, podría ser mejor si se usan más clases
 
 ## Temas
 - Construcción y configuración global de servidor express usando clases
-- Uso de middlewares globales
+- Uso de middlewares globales y específicos
 - Uso de variables de ambiente
 - Uso de rutas y controladores de forma separada
 - Recibir parámetros que forman parte de la ruta
 - Recibir parámetros opcionales (query params)
 - Recibir y convertir a JSON el cuerpo de peticiones POST, PUT
+- BD Mongo DB con mongoose, validaciones de campos
 
 

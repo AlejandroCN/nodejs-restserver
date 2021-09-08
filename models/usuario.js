@@ -31,4 +31,10 @@ const usuarioSchema = new Schema({
   },
 });
 
+// sobrescribiendo método para obtener los usuarios sin password y sin version
+usuarioSchema.methods.toJSON = function() {
+  const { __v, password, ...usuario } = this.toObject();
+  return usuario;
+}
+
 module.exports = model('Usuario', usuarioSchema);

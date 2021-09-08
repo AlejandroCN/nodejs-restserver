@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs');
-
 const Usuario = require('../models/usuario');
 
 const findAll = (req, res) => {
@@ -17,19 +16,12 @@ const save = async (req, res) => {
   const { nombre, correo, password, rol } = req.body;
   const usuario = new Usuario({ nombre, correo, password, rol });
 
-  const usuarioExistente = Usuario.findOne({correo});
-  if (usuarioExistente) {
-    return res.status(400).json({
-      mensaje: 'El correo indicado ya está en uso'
-    });
-  }
-
   const salt = bcrypt.genSaltSync(10);
   usuario.password = bcrypt.hashSync(password, salt);
   await usuario.save();
 
   res.json({
-    mensaje: 'Petición POST procesada',
+    mensaje: 'Usuario creado correctamente',
     usuario
   });
 }
