@@ -20,19 +20,22 @@ const save = async (req, res) => {
   usuario.password = bcrypt.hashSync(password, salt);
   await usuario.save();
 
-  res.json({
+  res.status(201).json({
     mensaje: 'Usuario creado correctamente',
     usuario
   });
 }
 
-const update = (req, res) => {
-  // parametros en la ruta
+const update = async (req, res) => {
   const id = req.params.id;
+  const { _id, password, google, estado, ...usuario } = req.body;
 
-  res.json({
-    mensaje: 'Petición UPDATE procesada',
-    id
+  // solo actualiza los campos que contenga usuario, los ausentes los deja como estan
+  const usuarioActualizado = await Usuario.findByIdAndUpdate(id, usuario, {new: true});
+
+  res.status(201).json({
+    mensaje: 'Usuario actualizado correctamente',
+    usuarioActualizado
   });
 }
 
